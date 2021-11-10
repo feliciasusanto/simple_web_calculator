@@ -19,6 +19,35 @@ const updateHistory = (value)=>{
     history.value += value
 }
 
+const inputOperator = (operator) => {
+    prevVal = currentVal
+    calcOper = operator
+    currentVal = ''
+    updateHistory(`${prevVal} ${calcOper}`)
+}
+
+const calculate = () => {
+    let result = ''
+    switch(calcOper){
+        case '+':
+            result = parseInt(prevVal) + parseInt(currentVal)
+            break
+        case '-':
+            result = parseInt(prevVal) - parseInt(currentVal)
+            break
+        case 'x':
+            result = parseInt(prevVal) * parseInt(currentVal)
+            break
+        case '/':
+            result = parseInt(prevVal) / parseInt(currentVal)
+            break
+        default:
+            break
+    }
+    currentVal = result
+    calcOper = ''
+}
+
 numbers.forEach((number)=>{
     number.addEventListener('click', (event)=>{
         // untuk menghindari angka dimulai dari 0
@@ -37,3 +66,26 @@ numbers.forEach((number)=>{
     })
 })
 
+operators.forEach((operator)=>{
+    operator.addEventListener('click', (event)=>{
+        inputOperator(event.target.value)
+    })
+})
+
+const btn_equal = document.getElementById('equal-btn')
+
+btn_equal.addEventListener('click', (event)=>{
+    calculate()
+    updateScreen(currentVal)
+    history.value = ''
+})
+
+const btn_clear = document.getElementById('clear-btn')
+
+btn_clear.addEventListener('click', (event)=>{
+    history.value = ''
+    currentVal = '0'
+    calcOper = ''
+    prevVal = ''
+    updateScreen(currentVal)
+})

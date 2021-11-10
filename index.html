@@ -37,7 +37,7 @@
             background: linear-gradient(139deg, rgba(166,255,244,1) 10%, rgba(248,168,255,1) 74%);
             border: outset;
         }
-        input[type="button"].operators, input[type="button"].percent, input[type="button"].clear-btn{
+        input[type="button"].operators, input[type="button"].percent, input[type="button"]#clear-btn, input[type="button"]#equal-btn{
             background: linear-gradient(139deg, rgba(178,242,255,1) 10%, rgba(216,255,55,1) 74%);
         }
     </style>
@@ -76,7 +76,7 @@
         <div class="row fourth-row">
             <input type="button" value="0" class="col-6 numbers">
             <input type="button" value="." class="col-3 point-symbol">
-            <input type="button" value="=" class="col-3 operators" id="equal-btn">
+            <input type="button" value="=" class="col-3" id="equal-btn">
         </div>
     </div>
     <script src="./calc_func.js"></script>
