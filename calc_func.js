@@ -26,6 +26,13 @@ const inputOperator = (operator) => {
     updateHistory(`${prevVal} ${calcOper}`)
 }
 
+const clearAll = ()=>{
+    history.value = ''
+    currentVal = '0'
+    calcOper = ''
+    prevVal = ''
+}
+
 const calculate = () => {
     let result = ''
     switch(calcOper){
@@ -77,15 +84,12 @@ const btn_equal = document.getElementById('equal-btn')
 btn_equal.addEventListener('click', (event)=>{
     calculate()
     updateScreen(currentVal)
-    history.value = ''
+    clearAll()
 })
 
 const btn_clear = document.getElementById('clear-btn')
 
 btn_clear.addEventListener('click', (event)=>{
-    history.value = ''
-    currentVal = '0'
-    calcOper = ''
-    prevVal = ''
+    clearAll()
     updateScreen(currentVal)
 })
