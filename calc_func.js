@@ -41,6 +41,10 @@ const decimalClicked = (point) => {
     if(currentVal.includes('.')){
         return
     }
+    // apabila angka yang tertera pada layar masih 0, sehingga di dpn koma terdapat angka 0
+    if (screen.value == '0'){
+        currentVal = screen.value
+    }
     currentVal += point
 }
 
@@ -94,9 +98,17 @@ operators.forEach((operator)=>{
 const btn_equal = document.getElementById('equal-btn')
 
 btn_equal.addEventListener('click', (event)=>{
-    calculate()
-    updateScreen(currentVal)
-    clearAll()
+    if(prevVal == ''){
+        updateScreen(screen.value) 
+    }
+    else{
+        if(screen.value != '0'){
+            currentVal = screen.value
+        }
+        calculate()
+        updateScreen(currentVal)
+        clearAll()
+    }
 })
 
 const btn_clear = document.getElementById('clear-btn')
