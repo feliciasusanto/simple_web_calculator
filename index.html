@@ -25,7 +25,7 @@
             text-align: right;
             letter-spacing: 1px;
             font-weight: 500;
-            margin: 0 auto 15px auto;
+            margin: 15px auto;
             border: inset;
             padding: 0 10px;
         }
@@ -40,19 +40,26 @@
         input[type="button"].operators, input[type="button"].percent, input[type="button"]#clear-btn, input[type="button"]#equal-btn{
             background: linear-gradient(139deg, rgba(178,242,255,1) 10%, rgba(216,255,55,1) 74%);
         }
+        input[type="button"]:active{
+            border: inset;
+        }
+        @keyframes hoverbtn{
+            from {opacity: 1;}
+            to {opacity: 0.8;}
+        }
+        input[type="button"]:hover{
+            animation: hoverbtn 1s ease infinite alternate;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <input class="history" disabled value="" style="border: inset; width: 100%; text-align: right;">
-        </div>
-        <div class="row">
             <input class="calc-screen" value=0 disabled>
         </div>
         <div class="row first-row">
             <input type="button" value="AC" class="col-6" id="clear-btn">
-            <input type="button" value="%" class="col-3 percent">
+            <input type="button" value="%" class="col-3" id='percent'>
             <input type="button" value="÷" class="col-3 operators" id="div-btn">
         </div>
         <div class="row second-row">

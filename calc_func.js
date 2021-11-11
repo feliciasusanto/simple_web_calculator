@@ -1,5 +1,4 @@
 let screen = document.querySelector('.calc-screen')
-let history = document.querySelector('.history')
 
 let numbers = document.querySelectorAll('.numbers')
 let operators = document.querySelectorAll('.operators')
@@ -14,11 +13,6 @@ const updateScreen = (number)=>{
     screen.value = number
 }
 
-// function untuk mengupdate history
-const updateHistory = (value)=>{
-    history.value += value
-}
-
 // function untuk mengubah temp angka ketika operator diklik
 const inputOperator = (operator) => {
     if(calcOper == ''){
@@ -26,13 +20,10 @@ const inputOperator = (operator) => {
     }
     calcOper = operator
     currentVal = ''
-    // ditambahkan parse float untuk memastikan di belakang angka terdapat koma atau tidak
-    updateHistory(`${parseFloat(prevVal)} ${calcOper} `)
 }
 
 // function to clear all values
 const clearAll = ()=>{
-    history.value = ''
     currentVal = '0'
     calcOper = ''
     prevVal = ''
@@ -53,6 +44,9 @@ const decimalClicked = (point) => {
 // function untuk menghitung
 const calculate = () => {
     let result = ''
+    if(currentVal == ''){
+        currentVal = '0'
+    }
     switch(calcOper){
         case '+':
             result = parseFloat(prevVal) + parseFloat(currentVal)
@@ -124,5 +118,12 @@ const point_sym = document.getElementById('point-symbol')
 
 point_sym.addEventListener('click', (event)=>{
     decimalClicked(event.target.value)
+    updateScreen(currentVal)
+})
+
+const btn_percent = document.getElementById('percent')
+
+btn_percent.addEventListener('click', (event)=>{
+    currentVal = currentVal / 100
     updateScreen(currentVal)
 })
