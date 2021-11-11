@@ -21,7 +21,9 @@ const updateHistory = (value)=>{
 
 // function untuk mengubah temp angka ketika operator diklik
 const inputOperator = (operator) => {
-    prevVal = currentVal
+    if(calcOper == ''){
+        prevVal = currentVal
+    }
     calcOper = operator
     currentVal = ''
     // ditambahkan parse float untuk memastikan di belakang angka terdapat koma atau tidak
