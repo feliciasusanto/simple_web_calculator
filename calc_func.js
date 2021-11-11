@@ -19,13 +19,16 @@ const updateHistory = (value)=>{
     history.value += value
 }
 
+// function untuk mengubah temp angka ketika operator diklik
 const inputOperator = (operator) => {
     prevVal = currentVal
     calcOper = operator
     currentVal = ''
-    updateHistory(`${prevVal} ${calcOper}`)
+    // ditambahkan parse float untuk memastikan di belakang angka terdapat koma atau tidak
+    updateHistory(`${parseFloat(prevVal)} ${calcOper} `)
 }
 
+// function to clear all values
 const clearAll = ()=>{
     history.value = ''
     currentVal = '0'
@@ -33,20 +36,29 @@ const clearAll = ()=>{
     prevVal = ''
 }
 
+// handle decimal clicked more than 1 time for current showed number
+const decimalClicked = (point) => {
+    if(currentVal.includes('.')){
+        return
+    }
+    currentVal += point
+}
+
+// function untuk menghitung
 const calculate = () => {
     let result = ''
     switch(calcOper){
         case '+':
-            result = parseInt(prevVal) + parseInt(currentVal)
+            result = parseFloat(prevVal) + parseFloat(currentVal)
             break
         case '-':
-            result = parseInt(prevVal) - parseInt(currentVal)
+            result = parseFloat(prevVal) - parseFloat(currentVal)
             break
         case 'x':
-            result = parseInt(prevVal) * parseInt(currentVal)
+            result = parseFloat(prevVal) * parseFloat(currentVal)
             break
         case '/':
-            result = parseInt(prevVal) / parseInt(currentVal)
+            result = parseFloat(prevVal) / parseFloat(currentVal)
             break
         default:
             break
@@ -91,5 +103,12 @@ const btn_clear = document.getElementById('clear-btn')
 
 btn_clear.addEventListener('click', (event)=>{
     clearAll()
+    updateScreen(currentVal)
+})
+
+const point_sym = document.getElementById('point-symbol')
+
+point_sym.addEventListener('click', (event)=>{
+    decimalClicked(event.target.value)
     updateScreen(currentVal)
 })
